@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Don't change "name": it ties this code to your deployed Worker.
+  "name": "iscte-student-worker",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+
+  // Static files in ./public (style.css, placeholder.jpg) are served without running your code.
+  // Everything else ("/", "/api/*") goes to the Worker.
+  "assets": { "directory": "./public" },
+
+  // Workers AI binding: available in code as env.AI
+  "ai": { "binding": "AI" },
+
+  "observability": { "enabled": true },
+
+  "vars": {
+    "NAME": "Your name",              // ← nickname or first name (it's public!)
+    "TAGLINE": "Your tagline here",   // ← one line about you
+    "EMOJI": "🚀",
+    "APOD_DATE": "2000-01-01",        // ← used in Mission 2
+    "CHARACTER_ID": "1",              // ← used in Phase 2
+    "HUB_URL": "https://arena.<your-domain>"   // ← don't change
+  }
+}
