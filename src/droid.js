@@ -7,7 +7,7 @@ import { buildSystemPrompt } from "./prompt.js";
 const TONE = "(your tone here)";
 
 // A small, cheap Workers AI chat model. It runs on your own free account through env.AI.
-const MODEL = "@cf/zai-org/glm-4.7-flash";
+const MODEL = "@cf/meta/llama-3.2-3b-instruct";
 
 // Your droid. The Hub calls POST /api/chat with { round, question } and expects
 // { answer } (max 280 characters) within 8 seconds. See AGENTS.md for the full contract.
