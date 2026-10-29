@@ -26,6 +26,13 @@ const SYSTEM = '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h
 const icon = (paths, cls) =>
   `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
 
+// The films row: one title per line.
+function filmsRow(films) {
+  if (!films?.length) return row("Films", null);
+  const items = films.map((title) => `<li>${esc(title)}</li>`).join("");
+  return `<div><dt>Films</dt><dd><ul class="films">${items}</ul></dd></div>`;
+}
+
 export function renderPage(env, character, colo, origin) {
   const name = esc(env.NAME);
   const tagline = esc(env.TAGLINE);
@@ -83,7 +90,7 @@ export function renderPage(env, character, colo, origin) {
         ${row("Homeworld", planet?.name)}
         ${row("Climate", planet?.climate)}
         ${row("Terrain", planet?.terrain)}
-        ${row("Films", c.films?.join(", "))}
+        ${filmsRow(c.films)}
       </dl>
     </section>
   </main>
