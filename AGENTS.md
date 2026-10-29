@@ -25,6 +25,7 @@ page (`/`), a card (`GET /api/card`) and a Star Wars droid (`POST /api/chat`) th
 - Never run `wrangler deploy`. Production deploys happen through `git push` (Workers Builds).
 - Never commit secrets or `.dev.vars`.
 - Only commit and push when the student asks.
+- The page sends a strict CSP (`default-src 'self'`): no inline `<script>` or `style="..."`. Put browser JavaScript in a file in `public/` and load it with `<script src="/name.js" defer>`.
 - Keep changes small and show the diff.
 
 ## Test
