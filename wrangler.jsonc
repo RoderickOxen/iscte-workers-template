@@ -20,6 +20,6 @@
     "EMOJI": "🚀",
     "APOD_DATE": "2000-01-01",        // ← used in Mission 2
     "CHARACTER_ID": "1",              // ← used in Phase 2
-    "HUB_URL": "https://arena.<your-domain>"   // ← don't change
+    "HUB_URL": "https://arena.cf2026iscte.nobledemos.com"   // ← don't change
   }
 }

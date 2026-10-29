@@ -13,7 +13,7 @@ You'll need a free Cloudflare account, a GitHub account and a NASA API key (http
 
 ## Then follow the Lab Guide
 
-**https://arena.<your-domain>/lab**
+**https://arena.cf2026iscte.nobledemos.com/lab**
 
 ## Run it locally
 
