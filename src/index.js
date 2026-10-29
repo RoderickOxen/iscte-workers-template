@@ -1,5 +1,5 @@
 import { renderPage } from "./page.js";
-import { getApod } from "./apod.js";
+import { getCharacter } from "./character.js";
 import { handleChat } from "./droid.js";
 
 export default {
@@ -24,9 +24,15 @@ function card(env) {
 }
 
 async function renderHome(request, env) {
-  const apod = await getApod(env.APOD_DATE, env);
+  const character = await getCharacter(env.CHARACTER_ID);
   const colo = request.cf?.colo || "your nearest data centre";
-  return new Response(renderPage(env, apod, colo), {
-    headers: { "content-type": "text/html; charset=utf-8" },
+  // The Hub draws your droid from your Worker's URL (origin, no trailing slash): so do we.
+  const origin = new URL(request.url).origin;
+  return new Response(renderPage(env, character, colo, origin), {
+    headers: {
+      "content-type": "text/html; charset=utf-8",
+      // Everything the page loads comes from this Worker (no inline scripts or styles).
+      "content-security-policy": "default-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'",
+    },
   });
 }

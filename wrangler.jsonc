@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "compatibility_date": "2026-10-01",
 
-  // Static files in ./public (style.css, placeholder.jpg) are served without running your code.
+  // Static files in ./public (style.css) are served without running your code.
   // Everything else ("/", "/api/*") goes to the Worker.
   "assets": { "directory": "./public" },
 
@@ -18,8 +18,9 @@
     "NAME": "Your name",              // ← nickname or first name (it's public!)
     "TAGLINE": "Your tagline here",   // ← one line about you
     "EMOJI": "🚀",
-    "APOD_DATE": "2000-01-01",        // ← used in Mission 2
-    "CHARACTER_ID": "1",              // ← used in Phase 2
+    // ← pick a number 1–83 from SWAPI people (17 doesn't exist),
+    //   e.g. 1 Luke, 4 Darth Vader, 14 Han Solo, 20 Yoda
+    "CHARACTER_ID": "1",
     "HUB_URL": "https://arena.cf2026iscte.nobledemos.com"   // ← don't change
   }
 }

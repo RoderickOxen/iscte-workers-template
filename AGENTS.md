@@ -1,13 +1,19 @@
 # Student Worker
 
-A Cloudflare Worker in plain JavaScript (no TypeScript, no frameworks). It serves a personal
+A Cloudflare Worker in plain JavaScript (no TypeScript, no frameworks). It serves a Droid ID card
 page (`/`), a card (`GET /api/card`) and a Star Wars droid (`POST /api/chat`) that the class Hub calls.
 
 ## Files
 - `src/droid.js`: the droid. `handleChat(request, env)` is where droid work happens.
-- `src/page.js`, `public/style.css`: the page. Page features go here.
-- `src/apod.js`, `src/swapi.js`, `src/labels.js`, `src/prompt.js`: working helpers. Use them; don't rewrite them.
+- `src/character.js`: `getCharacter(id)`, the student's Mission 2. Once it works, use it; don't rewrite it.
+- `src/prompt.js`: `buildSystemPrompt({ character, tone })`, a working helper. Use it; don't rewrite it.
 - `src/index.js`: router. Don't change it unless asked.
+- `src/page.js`, `src/theme.js`, `src/avatar.js`, `public/`: the pre-built ID card page (HTML, CSS, droid picture,
+  planet themes). Page features go here.
+- `wrangler.jsonc`: config (`vars`). `solutions/` is the teacher's reference: ignore it.
+
+## `getCharacter(id)` returns
+`{ name, height, mass, birthYear, gender, homeworld: { name, climate, terrain, population } | null, films: [up to 3 titles] }`
 
 ## Contract (never break)
 - `GET /api/card` → `{ name, tagline, emoji, characterId }`
@@ -15,9 +21,9 @@ page (`/`), a card (`GET /api/card`) and a Star Wars droid (`POST /api/chat`) th
 
 ## Rules
 - Never change `TONE` in `src/droid.js`: the student writes it.
-- Never read, print or commit `.dev.vars`. It holds secrets.
 - Never change `"name"` in `wrangler.jsonc`.
 - Never run `wrangler deploy`. Production deploys happen through `git push` (Workers Builds).
+- Never commit secrets or `.dev.vars`.
 - Only commit and push when the student asks.
 - Keep changes small and show the diff.
 

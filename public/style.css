@@ -1,62 +1,150 @@
-* {
-  box-sizing: border-box;
-}
+/* Pre-built: you don't need to edit this.
+   The base look is the Hub / Lab Guide style (colours and font come from tokens.css).
+   Each homeworld theme (the class on <body>, picked in src/theme.js) sets two things:
+   --primary (the accent colour) and --scene (a CSS-only landscape behind your droid). */
 
-html,
+* { box-sizing: border-box; }
 body {
-  height: 100%;
   margin: 0;
-}
-
-body {
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-  background-color: #05070f;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: #f4f6ff;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  background: var(--bg);
+  background-image: radial-gradient(circle at 15% 0%, var(--accent-wash), transparent 45%), radial-gradient(circle at 95% 100%, var(--accent-wash), transparent 45%);
+  color: var(--fg);
+  font: 14px/1.75 var(--font);
+  --accent-wash: color-mix(in srgb, var(--primary) 12%, transparent);
 }
+::selection { background: var(--primary); color: #21150e; }
+code { padding: 2px 4px; border: 1px solid var(--border-soft); background: var(--surface-2); font-size: .9em; }
+.icon { width: 17px; height: 17px; vertical-align: middle; }
 
-main {
-  flex: 1;
+/* Top bar and theme button */
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 4%; background: var(--surface); border-top: 4px solid var(--primary); border-bottom: 1px solid var(--border); }
+.brand { font-size: 18px; font-weight: 800; letter-spacing: -.04em; }
+.light { font-weight: 400; color: var(--muted); }
+.theme-button { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--border); background: var(--surface); color: var(--fg); cursor: pointer; }
+.theme-button:hover { background: var(--surface-2); }
+.theme-button:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; }
+.theme-button .icon { display: none; }
+.theme-button[data-mode=system] .theme-system, .theme-button[data-mode=light] .theme-sun, .theme-button[data-mode=dark] .theme-moon { display: block; }
+
+main { flex: 1; width: 100%; max-width: 40rem; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+
+/* The scene, the droid and the nameplate */
+.hero {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 2rem 1.5rem;
-  text-align: center;
+  gap: 1rem;
+  padding: 2rem 1rem 1.5rem;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+  background: var(--scene);
+}
+.droid-avatar { display: block; width: 128px; height: 128px; image-rendering: pixelated; background: #f5ebdb; border: 2px solid #2a1a0f; box-shadow: 4px 4px 0 rgba(0, 0, 0, .35); }
+.nameplate { max-width: 100%; padding: .6rem 1.2rem; text-align: center; background: var(--surface); border: 2px solid var(--border); box-shadow: 3px 3px 0 var(--border-soft); }
+.nameplate h1 { margin: 0; font-size: clamp(22px, 6vw, 32px); line-height: 1.25; letter-spacing: -.04em; overflow-wrap: anywhere; }
+.nameplate p { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
+
+/* The ID card */
+.card { margin-top: 1.5rem; padding: 1.25rem 1.5rem; background: var(--surface); border: 2px solid var(--border); border-top: 6px solid var(--primary); box-shadow: var(--shadow); }
+.card h2 { margin: 0 0 .75rem; color: var(--accent-text); font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase; }
+dl { margin: 0; }
+dl div { display: flex; gap: 1rem; padding: .35rem 0; border-bottom: 1px solid var(--border-soft); }
+dt { flex: 0 0 7rem; color: var(--muted); }
+dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.hint { margin: 0 0 .75rem; padding: .7rem 1rem; background: var(--warning-wash); border-left: 4px solid var(--warn); font-size: 12px; line-height: 1.7; }
+.hint small { display: block; margin-top: .25rem; color: var(--muted); }
+
+footer { padding: 1.25rem 1rem; text-align: center; color: var(--muted); font-size: 11px; }
+
+@media (max-width: 30rem) {
+  dl div { flex-direction: column; gap: 0; }
 }
 
-h1 {
-  margin: 0;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  letter-spacing: 0.02em;
+/* Themes. Each scene is only gradients: layers are "image position / size" (top layer first). */
+body.space {
+  --primary: #8a6cff;
+  --scene:
+    radial-gradient(1.5px 1.5px at 20% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 70% 20%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 85% 65%, #fff, transparent),
+    radial-gradient(1px 1px at 35% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 55% 55%, #fff, transparent),
+    radial-gradient(ellipse at 80% 10%, #3a2a7e, transparent 55%),
+    linear-gradient(#070a18, #121a44);
 }
-
-.tagline {
-  margin: 0.5rem 0 0;
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
-  opacity: 0.95;
+body.desert {
+  --primary: #e0702b;
+  --scene:
+    radial-gradient(circle at 78% 25%, #fff3b0 0 2.2rem, rgba(255, 220, 120, .4) 2.2rem 4rem, transparent 4.1rem),
+    radial-gradient(ellipse 80% 22% at 25% 100%, #c98a3d 0 99%, transparent 100%),
+    radial-gradient(ellipse 90% 28% at 90% 105%, #a56a28 0 99%, transparent 100%),
+    linear-gradient(#f4a259, #e5733a 60%, #7a3b1d);
 }
-
-footer {
-  padding: 1rem 1.5rem;
-  font-size: 0.9rem;
-  text-align: center;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+body.ice {
+  --primary: #3d8fc4;
+  --scene:
+    radial-gradient(ellipse 60% 22% at 20% 100%, #f2fbff 0 99%, transparent 100%),
+    radial-gradient(ellipse 70% 28% at 80% 102%, #d3ecf8 0 99%, transparent 100%),
+    radial-gradient(circle at 80% 22%, rgba(255, 255, 255, .85) 0 1.4rem, transparent 1.5rem),
+    linear-gradient(#8fb8d8, #cfe8f5 70%, #eef8ff);
 }
-
-footer p {
-  margin: 0.15rem 0;
+body.forest {
+  --primary: #3f9a58;
+  --scene:
+    repeating-linear-gradient(90deg, rgba(8, 40, 20, .5) 0 1.2rem, transparent 1.2rem 3rem) bottom / 100% 55% no-repeat,
+    radial-gradient(ellipse 80% 35% at 50% 100%, #0b3d1e, transparent 90%),
+    linear-gradient(#173d2a, #2f7a45 60%, #0b2a17);
 }
-
-.apod {
-  font-weight: 600;
+body.ocean {
+  --primary: #1f8fd0;
+  --scene:
+    repeating-radial-gradient(ellipse 9rem 1.5rem at 50% 100%, rgba(255, 255, 255, .14) 0 .25rem, transparent .35rem 1.5rem),
+    radial-gradient(circle at 75% 20%, #fff7c2 0 1.6rem, transparent 1.7rem),
+    linear-gradient(#7fd0f0, #1f7fc0 45%, #0a3a6e);
+}
+body.grass {
+  --primary: #4c9a3a;
+  --scene:
+    radial-gradient(circle at 20% 22%, #fffbd0 0 1.8rem, transparent 1.9rem),
+    radial-gradient(ellipse 90% 25% at 30% 100%, #4c9a3a 0 99%, transparent 100%),
+    radial-gradient(ellipse 90% 30% at 90% 105%, #3b7d2d 0 99%, transparent 100%),
+    linear-gradient(#8ed1ff, #cdeeff 60%, #6fb85a);
+}
+body.city {
+  --primary: #d6407e;
+  --scene:
+    repeating-linear-gradient(90deg, #121a33 0 1.4rem, #0b1124 1.4rem 2rem, #1a2547 2rem 3.2rem, #0b1124 3.2rem 4rem) bottom / 100% 40% no-repeat,
+    repeating-linear-gradient(90deg, #2a2f5c 0 .9rem, transparent .9rem 2.3rem) bottom / 100% 60% no-repeat,
+    linear-gradient(#1a1040, #5a2d82 55%, #ff7aa8);
+}
+body.swamp {
+  --primary: #7a9a2e;
+  --scene:
+    radial-gradient(ellipse 70% 20% at 30% 100%, rgba(40, 60, 20, .9) 0 99%, transparent 100%),
+    radial-gradient(ellipse 60% 40% at 70% 70%, rgba(180, 200, 120, .25), transparent 70%),
+    linear-gradient(#41502e, #2c3a1f 55%, #141c0e);
+}
+body.mountains {
+  --primary: #6a7fa8;
+  --scene:
+    conic-gradient(from 135deg at 50% 0, #55607a 0 90deg, transparent 90deg) left bottom / 65% 70% no-repeat,
+    conic-gradient(from 135deg at 50% 0, #3a4560 0 90deg, transparent 90deg) right bottom / 80% 55% no-repeat,
+    linear-gradient(#9fc4e8, #e8d9f0 70%, #f8e9d0);
+}
+body.lava {
+  --primary: #ff5a1f;
+  --scene:
+    radial-gradient(ellipse 70% 12% at 50% 100%, #ffb000 0 99%, transparent 100%),
+    radial-gradient(ellipse 100% 40% at 50% 100%, #ff4500, transparent 80%),
+    linear-gradient(#1a0505, #4a0e05 60%, #2a0a02);
+}
+body.gas {
+  --primary: #c9703a;
+  --scene:
+    repeating-linear-gradient(8deg, rgba(255, 255, 255, .12) 0 1rem, rgba(255, 200, 120, .12) 1rem 2.4rem),
+    linear-gradient(#f2c28a, #d98a6a 40%, #a45a8a 75%, #4d3a80);
 }
