@@ -1,7 +1,7 @@
 // MISSION 2: look up your Star Wars character on SWAPI.
 //
 // page.js (your ID card) and droid.js (your droid) both call getCharacter(CHARACTER_ID).
-// It must return exactly this shape (any "unknown" value becomes null):
+// It must return exactly this shape (any "unknown" or "n/a" value becomes null):
 //
 // {
 //   name:      string,                 // "Luke Skywalker"
@@ -21,7 +21,7 @@
 //   2. if the response is not ok, or fetch throws, try https://swapi.info/api/people/{id} instead
 //   3. a SECOND fetch: person.homeworld is a URL, fetch it for the planet details.
 //      Only do it if the URL is on swapi.dev or swapi.info (never fetch a URL you don't trust)
-//   4. map the fields (SWAPI uses snake_case: birth_year). Turn "unknown" into null.
+//   4. map the fields (SWAPI uses snake_case: birth_year). Turn "unknown" and "n/a" into null.
 //      person.films is a list of URLs: the number at the end is the film id, use FILM_TITLES below
 //   5. never throw: on any failure, return PLACEHOLDER
 

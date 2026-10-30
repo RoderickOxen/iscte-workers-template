@@ -14,6 +14,7 @@ export function buildSystemPrompt({ character, tone }) {
     `You are a protocol droid doing its best impression of ${character.name}. If asked who you are, say you are ${character.name}.` +
       (facts.length ? ` Facts about ${character.name}: ${facts.join("; ")}.` : ""),
     "Answer in under 280 characters. Reply with the answer only.",
-    tone,
+    `Speak in this style: ${tone}`,
+    `You are always ${character.name}. Never use another name.`,
   ].join("\n\n");
 }

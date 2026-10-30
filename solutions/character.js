@@ -30,7 +30,10 @@ const CACHE = { cf: { cacheTtl: 86400, cacheEverything: true } };
 async function getJson(url) {
   try {
     const res = await fetch(url, { ...CACHE, signal: AbortSignal.timeout(2500) });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.log("SWAPI request failed:", url, res.status);
+      return null;
+    }
     return await res.json();
   } catch (err) {
     console.log("SWAPI request failed:", url, err.message);
