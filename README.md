@@ -14,7 +14,7 @@ You'll need a free Cloudflare account and a GitHub account.
 
 ## Then follow the Lab Guide
 
-**https://arena.cf2026iscte.nobledemos.com/lab**
+**https://arena.cf2026iscte.nobledemos.com**
 
 ## Run it locally
 
